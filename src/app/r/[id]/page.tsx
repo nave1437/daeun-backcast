@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { siteBase } from "@/lib/site";
 import Link from "next/link";
 import { loadReading, TODAY_YEAR } from "@/lib/flow";
 import { ageIn, daeunAt } from "@/lib/saju/calc";
@@ -19,7 +20,7 @@ export default async function ReadingPage({ params }: { params: Promise<{ id: st
   const { id } = await params;
   const v = await loadReading(id);
   if (!v) notFound();
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "";
+  const base = await siteBase();
   const steps = v.plan.steps;
   const n = steps.length + 1; // 노드 = 구간들(지금 포함) + 목표
   const secByStart = new Map((v.prose?.sections ?? []).map((s) => [s.startYear, s]));

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { siteBase } from "@/lib/site";
 import Link from "next/link";
 import { loadReading, FRIEND_REWARD_COUNT } from "@/lib/flow";
 import { BirthFields } from "@/components/BirthFields";
@@ -16,7 +17,7 @@ export default async function JoinPage({ params, searchParams }: { params: Promi
   const { me } = await searchParams;
   const v = await loadReading(id);
   if (!v) notFound();
-  const base = process.env.NEXT_PUBLIC_BASE_URL ?? "";
+  const base = await siteBase();
   const mine = me ? v.friends.find((f) => f.id === me) : null;
   const steps = [...v.plan.steps].reverse();
 
