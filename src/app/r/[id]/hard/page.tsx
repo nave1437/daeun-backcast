@@ -7,6 +7,8 @@ import { HardList } from "@/components/plan/HardList";
 import { PRICE_KRW } from "@/lib/payment";
 
 export const dynamic = "force-dynamic";
+// Vercel 함수 실행 한도: retryProse(hard). Fluid compute Hobby 최대 300초.
+export const maxDuration = 300;
 
 /** 거센 해 리포트. 대운 이야기와는 별개의 유료 콘텐츠다. 결제 전에는 연도를 보여 주지 않는다. */
 export default async function HardPage({ params }: { params: Promise<{ id: string }> }) {

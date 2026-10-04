@@ -4,6 +4,9 @@ import { payAction } from "@/app/actions";
 import { PRICE_KRW, PAYMENT_MODE } from "@/lib/payment";
 import { ActionButton } from "@/components/ActionButton";
 
+// Vercel 함수 실행 한도: payAction(리포트 생성). Fluid compute Hobby 최대 300초.
+export const maxDuration = 300;
+
 export default async function PayPage({ searchParams }: { searchParams: Promise<{ id?: string }> }) {
   const { id } = await searchParams;
   if (!id) notFound();

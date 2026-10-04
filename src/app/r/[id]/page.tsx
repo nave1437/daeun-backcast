@@ -12,6 +12,8 @@ import { ViewTabs } from "@/components/ViewTabs";
 import { AdSlot } from "@/components/AdSlot";
 
 export const dynamic = "force-dynamic";
+// Vercel 함수 실행 한도: retryProse. Fluid compute Hobby 최대 300초.
+export const maxDuration = 300;
 
 export default async function ReadingPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
