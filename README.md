@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 대운 역산 — 눈덩이 계획
 
-## Getting Started
+꿈 한 줄과 이루고 싶은 해만 적으면, 사주의 10년 흐름(대운)이 들어오는 해를 기점으로 눈덩이가 굴러가는 이야기를 긴 글로 풀어 준다. 지금의 작은 반복 행동이 지금 대운의 중간 목표가 되고, 그 위에서 다음 대운의 더 큰 목표가 되고, 마지막 대운에서 꿈이 되는 구조. 할 일은 별도 카드(`/r/[id]/todo`)에서 대운별 도달 지점과 체크리스트로 본다. 가입 없음, 링크 7일 만료, 1,000원 단일 결제(봉인 뜯기), 친구 초대로 대운마다 같이 굴려줄 사람/깨기 쉬운 사람 표시.
 
-First, run the development server:
+## 실행
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Node 22 (.nvmrc)
+cp .env.example .env.local   # PROSE_PROVIDER=agent 면 로컬 Claude Code 로그인으로 생성(개발용), api 면 ANTHROPIC_API_KEY 필요
+npm install
+npm run dev -- -p 3111
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 구조
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/lib/saju/` 만세력 계산(lunar-javascript + 한국 시간 보정), 십신·충합 표, 오행 개수
+- `src/lib/engine/plan.ts` 오늘~목표를 대운이 들어오는 해(기점)로 자른 구간, 구간별 기운·실행하기 좋은 해·거센 해
+- `src/lib/engine/friends.ts` 친구 사주가 언덕마다 도움이 되는지 판정(코드)
+- `src/lib/ai/prose.ts` Claude Sonnet 5로 글만 생성: 꿈의 정량 변환(endState), 눈 한 줌(seed), 구간별 설명 글(사주 근거 → 이 해의 의미 → 이전 눈덩이 → 도달 지점 → 거센 해)과 도달 지점, 목표의 해 글, 대운별 할 일 카드. 기계 검사(lintProse) 실패 시 1회 재작성. 친구 메모는 확정된 글을 넘겨 따로 생성
+- `src/lib/store/db.ts` Node 내장 sqlite(배포 시 Postgres로 교체)
+- `src/app/r/[id]` 이야기(하늘 존 헤더 → 지금 → 기점들 → 목표의 해), `/todo` 할 일 카드, `/join` 친구 합류와 친구 카드, `/card` 스토리 이미지, `/pay` 테스트 결제
+- `src/components/Rail.tsx` 왼쪽 레일 SVG: [data-node] 위치를 재서 먹 원이 지금(위, 작음)에서 목표(아래, 금박)로 커지는 별자리 선을 그림
+- `src/components/Paper.tsx` 먹점·별자리·금박·섬유·그레인 고정 레이어(시드 고정, 애니메이션 없음)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+디자인은 "한지 천문도 — 먹별과 금박"(기본 먹지 다크, 푸터에서 한지 라이트 전환). 금박 면은 목표 원 하나뿐, 사주 용어는 칩의 한자로만.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+계산과 판정은 전부 코드가 하고 AI는 문장만 쓴다. 계획은 처음에 한 번 전부 생성해 저장하고, 무료·유료는 화면에서만 가린다(유료 문장은 결제 전 HTML에 내려보내지 않음).

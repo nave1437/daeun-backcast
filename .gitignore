@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# sqlite
+/data/
+.env.local
+
+# 로컬 전용
+/daeun.sqlite
+tsconfig.tsbuildinfo
