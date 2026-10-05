@@ -37,7 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <footer className="site-foot">
             <ThemeToggle />
-            <nav className="foot-links"><Link href="/privacy">개인정보처리방침</Link><Link href="/">소개</Link></nav>
+            <nav className="foot-links"><Link href="/guide">읽을거리</Link><Link href="/privacy">개인정보처리방침</Link><Link href="/">소개</Link></nav>
           </footer>
         </div>
       </body>

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SkyStars } from "@/components/Paper";
 import { AdSlot } from "@/components/AdSlot";
+import { GUIDE } from "@/content/guide";
 
 function Snowball() {
   // 아래(지금)에서 위(목표)로 커지는 먹 원 셋. 맨 위만 금박.
@@ -72,6 +73,14 @@ export default function Landing() {
         </figure>
       </section>
 
+      <section className="land-sec">
+        <span className="eyebrow accent">읽을거리</span>
+        <h2>사주와 역산을 처음 보신다면</h2>
+        <ul className="land-guide">
+          {GUIDE.slice(0, 4).map((g) => <li key={g.slug}><Link href={`/guide/${g.slug}`}><b>{g.title}</b><span>{g.summary}</span></Link></li>)}
+        </ul>
+        <Link href="/guide" className="tlink">열 편 전부 보기 →</Link>
+      </section>
       <AdSlot where="landing" />
       <section className="land-sec">
         <span className="eyebrow accent">준비물</span>

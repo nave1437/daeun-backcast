@@ -532,3 +532,21 @@ html .m-eye { margin-left: 8px; }
 .hard-list { display: grid; gap: 14px; margin-top: 20px; }
 .hard-year { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 16px; }
 .hard-year .hard-body { border-left-color: var(--seal); }
+
+/* ===== 읽을거리 ===== */
+.guide-list { margin: 8px 0 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.guide-list li { border-top: 1px solid var(--line); }
+.guide-list li:last-child { border-bottom: 1px solid var(--line); }
+.guide-list a { display: grid; grid-template-columns: 32px 1fr; gap: 2px 12px; padding: 14px 0; text-decoration: none; color: inherit; }
+.guide-no { grid-row: 1 / span 2; font-family: var(--font-display); font-weight: 500; font-size: 15px; color: var(--accent); padding-top: 3px; }
+.guide-title { font-family: var(--font-display); font-weight: 500; font-size: 18px; color: var(--ink); line-height: 1.35; }
+.guide-sum { font-size: 14px; color: var(--muted); line-height: 1.6; }
+.guide-index .btn-cta { margin-top: 12px; }
+.guide-body { display: grid; gap: 16px; font-size: 16px; line-height: 1.9; color: var(--ink-body); margin-top: 8px; }
+.guide-nav { display: flex; justify-content: space-between; gap: 12px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; }
+.guide-nav a { color: var(--ink); text-decoration: none; }
+.land-guide { margin: 0; padding: 0; list-style: none; display: grid; gap: 0; }
+.land-guide li { border-top: 1px solid var(--line); }
+.land-guide a { display: grid; gap: 2px; padding: 12px 0; text-decoration: none; color: inherit; }
+.land-guide b { font-family: var(--font-display); font-weight: 500; font-size: 17px; color: var(--ink); }
+.land-guide span { font-size: 14px; color: var(--muted); line-height: 1.6; }
