@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
  *  - 구글 애드센스: NEXT_PUBLIC_ADSENSE_CLIENT(ca-pub-…) + NEXT_PUBLIC_ADSENSE_SLOT
  *  둘 다 없으면 개발 환경에서만 점선 자리를 보여 준다. */
 const ADFIT = process.env.NEXT_PUBLIC_ADFIT_UNIT;
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-8219059284975523";
 const ADSENSE_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT;
 
 declare global { interface Window { adsbygoogle?: unknown[] } }

@@ -60,8 +60,8 @@ alter table friends enable row level security;
 
 ## 4. 배포 전 체크
 - [x] Supabase 연결(로컬에서 생성·친구·결제 표시까지 확인)
-- [ ] `PROSE_PROVIDER=api`로 로컬에서 1건 생성 확인(비용·시간)
-- [ ] 서버 액션 라우트 `maxDuration = 300`
+- [x] `PROSE_PROVIDER=api` 실측: 글 66원·38초, 리포트 18원·16초
+- [x] 서버 액션 라우트 `maxDuration = 300`, Vercel 임시 주소에서 생성·결제·카드 확인(2026-10-05)
 - [ ] 토스페이먼츠 승인 플로우 + 환불 정책 문구
 - [ ] `/privacy` 연락처 채우기, 사업자 정보(결제 시 필요) 푸터
 - [ ] 애드핏 매체 등록 → 단위 ID 환경변수

@@ -6,7 +6,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 import Script from "next/script";
 import Link from "next/link";
 
-const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+// 애드센스 게시자 ID. 환경변수가 없으면 기본값(nave.io.kr 계정)을 쓴다.
+const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-8219059284975523";
 
 const hahmlet = Hahmlet({ subsets: ["latin"], weight: "variable", display: "swap", variable: "--font-hahmlet", fallback: ["Gowun Batang", "AppleMyungjo", "Batang", "serif"] });
 const plex = IBM_Plex_Sans_KR({ subsets: ["latin"], weight: ["400", "500"], display: "swap", variable: "--font-plex", fallback: ["Apple SD Gothic Neo", "Noto Sans KR", "sans-serif"] });
