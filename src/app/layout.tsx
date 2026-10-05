@@ -3,7 +3,6 @@ import { Hahmlet, IBM_Plex_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { Paper } from "@/components/Paper";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import Script from "next/script";
 import Link from "next/link";
 
 // 애드센스 게시자 ID. 환경변수가 없으면 기본값(nave.io.kr 계정)을 쓴다.
@@ -29,9 +28,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={HANJA_URL} />
         <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}` }} />
+        {ADSENSE_CLIENT && <meta name="google-adsense-account" content={ADSENSE_CLIENT} />}
+        {ADSENSE_CLIENT && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossOrigin="anonymous" />}
       </head>
       <body>
-        {ADSENSE_CLIENT && <Script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossOrigin="anonymous" strategy="afterInteractive" />}
         <Paper />
         <div className="page">
           {children}
