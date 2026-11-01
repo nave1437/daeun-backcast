@@ -8,7 +8,7 @@ export function JoinForm({ readingId, children }: { readingId: string; children:
     <form action={act} className="sheet">
       {children}
       {state && !state.ok && <p className="err">{state.error}</p>}
-      <button className="btn-cta" disabled={pending}>{pending ? <span className="pulse-dot">먹을 갈고 있습니다</span> : "내 사주 올리기"}</button>
+      <button className="btn-cta" disabled={pending}>{pending ? <span className="pulse-dot">계산하고 있어요</span> : "궁합 보기"}</button>
     </form>
   );
 }

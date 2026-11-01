@@ -8,6 +8,14 @@ import { useEffect, useRef } from "react";
 const ADFIT = process.env.NEXT_PUBLIC_ADFIT_UNIT;
 const ADSENSE_CLIENT = process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-8219059284975523";
 const ADSENSE_SLOT = process.env.NEXT_PUBLIC_ADSENSE_SLOT;
+// 자리별 광고 단위(없으면 기본 단위 하나를 전부에 씀). Next 는 process.env.NEXT_PUBLIC_* 를 이름 그대로 써야 넣어 주므로 하나씩 적는다.
+const SLOT_BY_WHERE: Record<string, string | undefined> = {
+  landing: process.env.NEXT_PUBLIC_ADSENSE_SLOT_LANDING,
+  story: process.env.NEXT_PUBLIC_ADSENSE_SLOT_STORY,
+  "story-2": process.env.NEXT_PUBLIC_ADSENSE_SLOT_STORY_2,
+  bottom: process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM,
+};
+const slotFor = (where: string) => SLOT_BY_WHERE[where] || ADSENSE_SLOT;
 
 declare global { interface Window { adsbygoogle?: unknown[] } }
 
@@ -21,15 +29,16 @@ export function AdSlot({ where }: { where: string }) {
       el.appendChild(sc);
       return;
     }
-    if (ADSENSE_CLIENT && ADSENSE_SLOT) {
+    if (ADSENSE_CLIENT && slotFor(where)) {
       try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch { /* 차단기 */ }
     }
-  }, []);
+  }, [where]);
   if (ADFIT) return <div className="ad" data-where={where} aria-label="광고"><div ref={ref} /></div>;
-  if (ADSENSE_CLIENT && ADSENSE_SLOT) {
+  const slot = slotFor(where);
+  if (ADSENSE_CLIENT && slot) {
     return (
       <div className="ad" data-where={where} aria-label="광고">
-        <ins className="adsbygoogle" style={{ display: "block" }} data-ad-client={ADSENSE_CLIENT} data-ad-slot={ADSENSE_SLOT} data-ad-format="auto" data-full-width-responsive="true" />
+        <ins className="adsbygoogle" style={{ display: "block" }} data-ad-client={ADSENSE_CLIENT} data-ad-slot={slot} data-ad-format="auto" data-full-width-responsive="true" />
       </div>
     );
   }

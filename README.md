@@ -14,9 +14,9 @@ npm run dev -- -p 3111
 ## 구조
 
 - `src/lib/saju/` 만세력 계산(lunar-javascript + 한국 시간 보정), 십신·충합 표, 오행 개수
-- `src/lib/engine/plan.ts` 오늘~목표를 대운이 들어오는 해(기점)로 자른 구간, 구간별 기운·실행하기 좋은 해·거센 해
+- `src/lib/engine/plan.ts` 오늘~목표를 대운이 들어오는 해(기점)로 자른 구간, 구간별 기운·실행하기 좋은 해·조심할 해
 - `src/lib/engine/friends.ts` 친구 사주가 언덕마다 도움이 되는지 판정(코드)
-- `src/lib/ai/prose.ts` Claude Sonnet 5로 글만 생성: 꿈의 정량 변환(endState), 눈 한 줌(seed), 구간별 설명 글(사주 근거 → 이 해의 의미 → 이전 눈덩이 → 도달 지점 → 거센 해)과 도달 지점, 목표의 해 글, 대운별 할 일 카드. 기계 검사(lintProse) 실패 시 1회 재작성. 친구 메모는 확정된 글을 넘겨 따로 생성
+- `src/lib/ai/prose.ts` Claude Sonnet 5로 글만 생성: 꿈의 정량 변환(endState), 눈 한 줌(seed), 구간별 설명 글(사주 근거 → 이 해의 의미 → 이전 눈덩이 → 도달 지점 → 조심할 해)과 도달 지점, 목표의 해 글, 대운별 할 일 카드. 기계 검사(lintProse) 실패 시 1회 재작성. 친구 메모는 확정된 글을 넘겨 따로 생성
 - `src/lib/store/db.ts` Node 내장 sqlite(배포 시 Postgres로 교체)
 - `src/app/r/[id]` 이야기(하늘 존 헤더 → 지금 → 기점들 → 목표의 해), `/todo` 할 일 카드, `/join` 친구 합류와 친구 카드, `/card` 스토리 이미지, `/pay` 테스트 결제
 - `src/components/Rail.tsx` 왼쪽 레일 SVG: [data-node] 위치를 재서 먹 원이 지금(위, 작음)에서 목표(아래, 금박)로 커지는 별자리 선을 그림

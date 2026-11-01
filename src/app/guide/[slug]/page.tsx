@@ -23,7 +23,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
       <div className="guide-body">{g.body.map((p, k) => <p key={k}>{p}</p>)}</div>
       <nav className="guide-nav">
         {prev ? <Link href={`/guide/${prev.slug}`}>← {prev.title}</Link> : <span />}
-        {next ? <Link href={`/guide/${next.slug}`}>{next.title} →</Link> : <Link href="/start">내 꿈 역산하기 →</Link>}
+        {next ? <Link href={`/guide/${next.slug}`}>{next.title} →</Link> : <Link href="/start">시작하기 →</Link>}
       </nav>
     </article>
   );

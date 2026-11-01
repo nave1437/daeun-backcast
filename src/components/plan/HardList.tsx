@@ -7,12 +7,12 @@ function subscribe(cb: () => void) { listeners.add(cb); window.addEventListener(
 function read(key: string) { try { return localStorage.getItem(key) ?? "{}"; } catch { return "{}"; } }
 function write(key: string, v: Record<string, boolean>) { try { localStorage.setItem(key, JSON.stringify(v)); } catch { /* 무시 */ } listeners.forEach((l) => l()); }
 
-/** 결제 후 보이는 거센 해 목록. 해마다 풀이·조심할 것·할 일(체크 가능). */
+/** 조심할 해 목록. 해마다 풀이·조심할 것·할 일(체크 가능). 친구가 들어오면 열린다. */
 export function HardList({ readingId, years }: { readingId: string; years: HardReport["years"] }) {
   const key = `hard:${readingId}`;
   const raw = useSyncExternalStore(subscribe, () => read(key), () => "{}");
   const done: Record<string, boolean> = (() => { try { return JSON.parse(raw) as Record<string, boolean>; } catch { return {}; } })();
-  if (!years.length) return <p className="cap" style={{ marginTop: 24 }}>목표의 해까지 거센 해가 없습니다. 흐름이 순한 편이에요.</p>;
+  if (!years.length) return <p className="cap" style={{ marginTop: 24 }}>목표의 해까지 특별히 조심할 해는 없어요.</p>;
   return (
     <section className="hard-list">
       {years.map((y) => (

@@ -2,7 +2,7 @@
 
 /* ================================================================
    대운 역산 · 한지 천문도 — 먹별과 금박
-   기본 = 먹지(墨紙, 다크). data-theme="light" 이면 한지.
+   먹지(墨紙, 다크) 하나만 쓴다. 밝은 화면 없음(2026-10-12 제거).
    그림자 토큰 없음. 빛나는 면은 목표 원 하나뿐. 먹은 번질 뿐 빛나지 않는다.
    ================================================================ */
 :root {
@@ -25,24 +25,9 @@
   --font-hanja: "Noto Serif KR", var(--font-display);
   --rail-w: 72px;
 }
-:root[data-theme="light"] {
-  color-scheme: light;
-  --paper: #F1ECE3; --bg: #F1ECE3; --surface: #FAF7F1; --surface2: #E7E1D5;
-  --ink: #1C1A18; --ink-body: #1C1A18; --muted: #655F56; --hint: #7C7568;
-  --line: #D7D3CB; --line-strong: #BEBAB2;
-  --accent: #7A5A14; --accent-ink: #1C1A18; --glow: #C9A24B;
-  --foil-1: #EFD58A; --foil-2: #C9A24B; --foil-3: #A47F2A;
-  --seal: #A9352B; --seal-ink: #FAF7F1;
-  --cta: #1C1A18; --cta-ink: #F1ECE3; --cta-hover: #2A251F; --focus: #7A5A14;
-  --wood: #2F6B5E; --fire: #B2432F; --earth: #8A5626; --metal: #5F646A; --water: #2E3A5C;
-  --tint-wood: #DADDD3; --tint-fire: #E9D8CD; --tint-earth: #E6DBCD; --tint-metal: #E1DDD6; --tint-water: #DAD7D3;
-  --dot-a: #C2BEB6; --dot-b: #CFCAC3; --dot-c: #DCD7CF;
-  --gate: rgba(250,247,241,.78); --scrim: rgba(241,236,227,.85); --track: rgba(28,26,24,.05); --halo: rgba(28,26,24,.06);
-  --fiber-alpha: .07; --fiber-blend: multiply; --grain-alpha: .05; --grain-blend: multiply;
-}
 @media (min-width: 768px) { :root { --rail-w: 104px; } }
 
-/* 하늘 존 — 라이트에서도 항상 먹지 밤하늘 */
+/* 하늘 존 — 먹지 밤하늘 */
 .zone-sky {
   color-scheme: dark; position: relative; isolation: isolate; overflow: hidden;
   --bg: var(--sky-bg); --surface: #1C1815; --surface2: #262019;
@@ -550,3 +535,238 @@ html .m-eye { margin-left: 8px; }
 .land-guide a { display: grid; gap: 2px; padding: 12px 0; text-decoration: none; color: inherit; }
 .land-guide b { font-family: var(--font-display); font-weight: 500; font-size: 17px; color: var(--ink); }
 .land-guide span { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+.hard-unlock { font-size: 15px; line-height: 1.7; color: var(--ink-body); border-left: 2px solid var(--foil-2); padding-left: 12px; }
+
+/* ===== 가독성 조정 (2026-10-11): 글자 작게, 줄 간격 정리, 문단 나눔 ===== */
+html body { font-size: 15.5px; line-height: 1.72; word-break: normal; overflow-wrap: anywhere; letter-spacing: -0.005em; }
+html h1 { font-size: 26px; line-height: 1.25; }
+html h2 { font-size: 19px; }
+html .hero h1, html .land-hero h1 { font-size: 28px; }
+html .land-hero .sub { font-size: 15px; line-height: 1.7; }
+html .goal-year { font-size: 56px; }
+html .goal-name { font-size: 20px; }
+html .goal-end { font-size: 15.5px; }
+html .goal-read { font-size: 13px; line-height: 1.65; margin-top: 10px; }
+html .goal-read-k { display: block; color: var(--accent); margin-bottom: 2px; }
+html .goal-down { font-size: 11.5px; margin-top: 28px; }
+html .story .m-year, html .marker .m-year { font-size: 34px; }
+html .story .m-year small { font-size: 14px; }
+html .s-daeun { font-size: 13px; }
+html .s-title { font-size: 19px; margin-top: 4px; }
+html .s-body { font-size: 15.5px; line-height: 1.8; display: grid; gap: 12px; margin-top: 4px; }
+html .s-body p { margin: 0; }
+html .story-goal .s-body { font-size: 16px; }
+html .story, html .story-node-cell { padding-top: 36px; }
+html .eyebrow { font-size: 11px; }
+html .cap { font-size: 13.5px; line-height: 1.65; }
+html .notice { font-size: 11.5px; line-height: 1.6; }
+html .tabs a { font-size: 15.5px; height: 42px; }
+html .badge { height: 24px; font-size: 12.5px; }
+html .todo-head-page h1 { font-size: 22px; }
+html .ladder-txt { font-size: 14.5px; }
+html .ladder-year, html .ladder-pct { font-size: 11.5px; }
+html .state { font-size: 17.5px; line-height: 1.45; }
+html .chain-tasks label { font-size: 14.5px; line-height: 1.5; min-height: 40px; padding: 8px 0; }
+html .chain-tasks input { width: 18px; height: 18px; }
+html .chain-end { font-size: 19px; }
+html .hard-head b { font-size: 16px; } html .hard-head span { font-size: 14px; }
+html .hard-body { font-size: 14.5px; line-height: 1.7; }
+html .hard-pitch .state { font-size: 19px; }
+html .land-steps b { font-size: 17px; } html .land-steps p { font-size: 14.5px; }
+html .land-sample blockquote { font-size: 14.5px; line-height: 1.75; }
+html .land-needs { font-size: 14.5px; }
+html .guide-body { font-size: 15px; line-height: 1.85; }
+html .guide-title { font-size: 16.5px; } html .guide-sum { font-size: 13.5px; }
+html .legal h1 { font-size: 24px; } html .legal { font-size: 14.5px; }
+html .field input, html .field select, html .field textarea { font-size: 16px; } /* iOS 자동 확대 방지: 16px 유지 */
+html .btn-cta { height: 52px; font-size: 17px; }
+html .start-head h1 { font-size: 24px; }
+html .guide { font-size: 13px; }
+
+/* ===== 보상형 광고 게이트 (2026-10-11): 광고 한 편 보면 결과 열림 ===== */
+.gate { padding: 24px 0 8px; }
+.gate-wait { min-height: 360px; }
+.gate-card { gap: 14px; align-items: start; }
+.gate-card .state { font-size: 19px; line-height: 1.45; }
+.gate-card .btn-cta { height: 52px; font-family: var(--font-body); font-weight: 500; font-size: 16px; }
+.gate-card .cap { margin: 0; }
+
+/* ===== 2026-10-12 화면 재구성: 탭 없이 한 페이지, 가운데 정렬, 장식 최소, 버튼 통합 ===== */
+.center { text-align: center; }
+.r-label { font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+.step-k { font-size: 13px; font-weight: 500; color: var(--accent); letter-spacing: .02em; }
+
+/* 결과 맨 위 */
+.r-hero { margin-inline: calc(50% - 50vw); padding: 64px 20px 48px; text-align: center; }
+.r-hero-in { display: grid; justify-items: center; gap: 6px; max-width: 360px; margin: 0 auto; }
+.r-hero-in .orb.goal { margin-bottom: 10px; }
+.r-year { font-family: var(--font-display); font-weight: 300; font-size: 64px; line-height: 1; letter-spacing: -0.03em; color: var(--accent); display: flex; align-items: baseline; gap: 8px; margin-top: 2px; }
+.r-year small { font-family: var(--font-body); font-size: 15px; color: var(--muted); letter-spacing: 0; font-weight: 400; }
+.r-goal { font-family: var(--font-display); font-weight: 500; font-size: 22px; line-height: 1.35; color: var(--ink); margin-top: 8px; }
+.r-end { font-size: 15px; line-height: 1.7; color: var(--ink-body); margin-top: 4px; }
+
+/* 눈덩이 원: 작은 먹 점 → 금박 원 */
+.orb { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--ink); flex-shrink: 0; }
+.orb.s2 { width: 14px; height: 14px; } .orb.s3 { width: 18px; height: 18px; } .orb.s4 { width: 22px; height: 22px; }
+.orb.gold, .orb.goal { background: radial-gradient(circle at 35% 30%, var(--foil-1), var(--foil-2) 55%, var(--foil-3)); }
+.orb.goal { width: 40px; height: 40px; }
+
+/* 꿈을 읽은 방식 */
+.read-card { margin-top: 20px; padding: 14px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; font-size: 14.5px; line-height: 1.75; color: var(--ink-body); }
+.read-card b { display: block; font-weight: 500; color: var(--ink); margin-bottom: 4px; font-size: 13.5px; }
+
+/* 섹션 공통 */
+.sec { padding-top: 44px; display: grid; gap: 10px; }
+.sec-title { text-align: center; font-size: 20px; line-height: 1.3; }
+.sec-sub { text-align: center; font-size: 14px; color: var(--muted); line-height: 1.65; margin: 0 auto; max-width: 30em; }
+.sec .ladder { margin-top: 8px; }
+.sec .btn-ghost { justify-self: center; }
+
+/* 대운 블록: 가운데 선 위의 원 → 연도 → 제목(가운데) → 본문(왼쪽) → 할 일 카드 */
+.plan { gap: 0; }
+.blk { display: grid; justify-items: center; text-align: center; padding-top: 6px; }
+.blk-line { width: 1px; height: 40px; background: var(--line-strong); }
+.blk-years { margin-top: 12px; font-family: var(--font-display); font-weight: 300; font-size: 30px; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); }
+.blk-years small { display: block; font-family: var(--font-body); font-size: 13.5px; color: var(--muted); margin-top: 6px; letter-spacing: 0; font-weight: 400; }
+.blk-years small .hanja { font-size: 14px; color: var(--ink-body); }
+.blk .badges { justify-content: center; margin-top: 10px; }
+.blk-title { font-size: 19px; line-height: 1.35; margin-top: 14px; font-weight: 600; }
+.blk-body { justify-self: stretch; text-align: left; display: grid; gap: 12px; margin-top: 14px; font-size: 15.5px; line-height: 1.8; color: var(--ink-body); }
+.blk .cap { margin-top: 12px; }
+.blk .ad { justify-self: stretch; margin-top: 28px; }
+.todo { justify-self: stretch; text-align: left; margin-top: 20px; background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 14px; display: grid; gap: 10px; }
+.todo-head { display: grid; grid-template-columns: 40px 1fr; gap: 12px; align-items: center; }
+.todo-k { font-size: 12.5px; color: var(--muted); }
+.todo-state { font-family: var(--font-display); font-weight: 600; font-size: 16.5px; line-height: 1.45; color: var(--ink); margin-top: 2px; }
+.todo-pct { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.todo .chain-tasks { border: 0; border-top: 1px solid var(--line); border-radius: 0; background: transparent; padding: 4px 0 0; }
+.todo .chain-tasks label { font-size: 14.5px; line-height: 1.5; min-height: 40px; padding: 8px 0; }
+.todo .chain-tasks li + li label { border-top: 1px solid var(--line); }
+.goal-card { justify-self: stretch; margin-top: 18px; border: 1px solid var(--foil-3); background: linear-gradient(135deg, color-mix(in srgb, var(--foil-1) 10%, var(--surface)), var(--surface) 70%); border-radius: 4px; padding: 16px; text-align: center; display: grid; gap: 6px; }
+.goal-card span { font-size: 12.5px; color: var(--muted); }
+.goal-card p { font-family: var(--font-display); font-weight: 600; font-size: 17px; line-height: 1.45; color: var(--ink); }
+
+/* 조심할 해 잠김 카드 */
+.lock-card { background: var(--surface); border: 1px solid var(--line); border-radius: 4px; padding: 20px 16px; display: grid; gap: 10px; text-align: center; justify-items: center; margin-top: 6px; }
+.lock-card .n { font-family: var(--font-display); font-weight: 600; font-size: 20px; color: var(--ink); }
+.lock-card p { font-size: 14.5px; line-height: 1.7; color: var(--ink-body); max-width: 28em; }
+.lock-card .btn-cta { margin-top: 4px; }
+.sec .hard-list { margin-top: 6px; }
+
+/* 친구 목록, 공유 */
+.friends { margin: 4px 0 0; padding: 0; list-style: none; display: grid; gap: 4px; justify-items: center; font-size: 14.5px; }
+.friends li { display: flex; gap: 8px; align-items: baseline; }
+.friends b { font-weight: 500; color: var(--ink); }
+.friends span { color: var(--muted); }
+.share-sec { justify-items: center; padding-top: 40px; }
+.share-sec .btn-cta { font-family: var(--font-body); font-weight: 500; font-size: 17px; height: 54px; }
+.share-sec .tlink { padding: 4px 0; }
+.share-sec .notice { max-width: 30em; margin-top: 8px; line-height: 1.6; }
+
+/* 게이트 카드도 가운데 */
+.gate-card { justify-items: center; text-align: center; }
+.gate-card .state { font-size: 18px; }
+.gate-card .cap { max-width: 26em; }
+
+/* 랜딩·시작·초대 머리 가운데 정렬 */
+html .land-hero-in { justify-items: center; text-align: center; }
+html .land-hero .sub { max-width: 30em; }
+html .land-sec h2, html .start-head h1 { text-align: center; }
+html .land-sec { justify-items: stretch; }
+html .land-sec .tlink.center { justify-self: center; }
+html .start-head { text-align: center; justify-items: center; padding-top: 40px; }
+html .start-head .cap { max-width: 30em; }
+html .start-head h1 { font-size: 24px; }
+html .start-step { text-align: left; }
+html .land-steps { text-align: left; }
+
+/* 푸터 가운데 */
+html .site-foot { justify-content: center; }
+html .foot-links { margin-left: 0; }
+/* 제목·짧은 가운데 글은 어절 단위로 줄바꿈(긴 본문만 글자 단위) */
+h1, h2, h3, .r-goal, .r-end, .sec-sub, .blk-title, .todo-state, .ladder-txt, .lock-card, .read-card b, .gate-card .state, .gate-card .cap,
+.land-hero .sub, .start-head .cap, .cap.center, .notice.center, .land-steps b, .guide-title { word-break: keep-all; overflow-wrap: break-word; }
+/* 결과 머리: 밝은 화면에서도 글이 어두운 하늘 안에 머물도록 아래 여백을 두고 짧게 밝아진다 */
+.r-hero { padding-bottom: 150px; background:
+  radial-gradient(60% 40% at 78% 8%, rgba(239,213,138,.14), transparent 70%),
+  radial-gradient(120% 60% at 50% -10%, rgba(237,230,217,.06), transparent 70%),
+  linear-gradient(to bottom, var(--sky-bg) 0, var(--sky-bg) calc(100% - 130px), var(--paper) 100%); }
+.r-hero + .gate, .r-hero + .read-card, .r-hero + .gate-wait { margin-top: -70px; position: relative; z-index: 1; }
+.join-row b.display { white-space: nowrap; font-size: 16px; letter-spacing: -0.01em; }
+
+/* ===== 시작하기 버튼: 금박 면 + 천천히 지나가는 빛 + 숨 쉬는 테두리 빛. 목표 원과 같은 금박. ===== */
+.btn-start {
+  position: relative; isolation: isolate; overflow: hidden; width: 100%; height: 58px; border-radius: 6px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none;
+  background: linear-gradient(135deg, #F3DC95 0%, var(--foil-2) 48%, #B8933F 100%);
+  color: #171411; font-family: var(--font-display); font-weight: 700; font-size: 19px; letter-spacing: -0.01em;
+  box-shadow: 0 0 0 0 rgba(239,213,138,0), 0 12px 28px -14px rgba(212,177,94,.55);
+  transition: transform .15s ease-out, filter .2s ease-out;
+  animation: start-breathe 3.6s ease-in-out infinite;
+}
+.btn-start::after {
+  content: ""; position: absolute; top: -40%; bottom: -40%; left: -45%; width: 34%; z-index: 1; pointer-events: none;
+  background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,250,236,.55) 50%, rgba(255,255,255,0) 100%);
+  transform: skewX(-18deg); animation: start-sheen 4.8s ease-in-out infinite;
+}
+.btn-start > span { position: relative; z-index: 2; }
+.btn-start .arrow { font-family: var(--font-body); font-weight: 500; font-size: 20px; line-height: 1; animation: start-nudge 4.8s ease-in-out infinite; }
+.btn-start:hover { filter: brightness(1.05); transform: translateY(-1px); }
+.btn-start:active { transform: scale(.985); filter: brightness(.97); }
+.btn-start:focus-visible { outline: 2px solid var(--foil-1); outline-offset: 3px; }
+@keyframes start-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,213,138,0), 0 12px 28px -14px rgba(212,177,94,.55); }
+  50% { box-shadow: 0 0 0 7px rgba(239,213,138,.12), 0 16px 36px -14px rgba(212,177,94,.85); }
+}
+@keyframes start-sheen { 0% { left: -45%; } 38% { left: 125%; } 100% { left: 125%; } }
+@keyframes start-nudge { 0%, 22%, 48%, 100% { transform: translateX(0); } 32% { transform: translateX(5px); } }
+.land-hero .btn-start { margin-top: 6px; max-width: 320px; }
+.land-cta { justify-items: center; }
+.land-cta .btn-start { max-width: 320px; }
+@media (prefers-reduced-motion: reduce) { .btn-start, .btn-start::after, .btn-start .arrow { animation: none; } }
+/* 누를 수 있는 건 전부 손가락 커서 */
+a[href], button:not(:disabled), label:has(input), summary, select, [role="button"] { cursor: pointer; }
+
+/* 처음이라면: 밑줄 글자 버튼. 시트 안 설명 글 */
+.sheet-link { font-size: 15px; padding: 4px 0; }
+.land-hero .sheet-link { margin-top: -4px; }
+.bsheet-art { display: grid; gap: 10px; padding-top: 18px; border-top: 1px solid var(--line); }
+.bsheet-art h3 { font-size: 17px; font-weight: 600; line-height: 1.35; }
+.bsheet-art p { font-size: 14.5px; line-height: 1.75; color: var(--ink-body); }
+
+/* ===== 「처음이라면」 바텀 시트: body 끝에 붙는 고정 레이어 ===== */
+.bsheet-root { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: flex-end; justify-content: center; text-align: left; }
+.bsheet-dim { position: absolute; inset: 0; background: rgba(10,8,6,0); transition: background .3s ease-out; }
+.bsheet-root.on .bsheet-dim { background: rgba(10,8,6,.6); }
+.bsheet { position: relative; width: 100%; max-width: 430px; max-height: 88vh; max-height: 88dvh; background: var(--surface); color: var(--ink-body);
+  border-radius: 16px 16px 0 0; overflow: hidden; transform: translateY(100%); transition: transform .3s cubic-bezier(.2,.8,.2,1); }
+.bsheet-root.on .bsheet { transform: translateY(0); }
+.bsheet-in { max-height: 88vh; max-height: 88dvh; overflow-y: auto; -webkit-overflow-scrolling: touch; overscroll-behavior: contain;
+  padding: 10px 20px calc(28px + env(safe-area-inset-bottom, 0px)); display: grid; gap: 14px; }
+.bsheet-handle { width: 40px; height: 4px; border-radius: 2px; background: var(--line-strong); justify-self: center; }
+.bsheet-head { display: flex; align-items: center; justify-content: space-between; }
+.bsheet-head h2 { font-size: 20px; }
+.bsheet-x { width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--surface2); color: var(--ink); font-size: 22px; line-height: 1; display: flex; align-items: center; justify-content: center; }
+.bsheet .land-steps li { padding-top: 14px; padding-bottom: 16px; }
+.bsheet .land-steps b { font-size: 17px; }
+.bsheet .land-steps p { font-size: 14.5px; line-height: 1.7; }
+body.sheet-lock { overflow: hidden; }
+@media (prefers-reduced-motion: reduce) { .bsheet, .bsheet-dim { transition: none; } }
+
+/* 빈 여백 정리: 하늘 아래 320px 띠·푸터 아래 96px 은 스크롤만 늘린다 */
+html .page { padding-bottom: 24px; }
+html .site-foot { margin-top: 28px; }
+.land-hero { padding-bottom: 40px; background:
+  radial-gradient(60% 40% at 78% 8%, rgba(239,213,138,.14), transparent 70%),
+  radial-gradient(120% 60% at 50% -10%, rgba(237,230,217,.06), transparent 70%),
+  linear-gradient(to bottom, var(--sky-bg) 0, var(--sky-bg) calc(100% - 110px), var(--paper) 100%); }
+.land-hero .band-space { display: none; }
+.land-hero .notice { margin-bottom: 70px; }
+.land-hero + .ad { margin-top: 8px; }
+.land-hero .notice { margin-bottom: 50px; }
+.land-hero { background:
+  radial-gradient(60% 40% at 78% 8%, rgba(239,213,138,.14), transparent 70%),
+  radial-gradient(120% 60% at 50% -10%, rgba(237,230,217,.06), transparent 70%),
+  linear-gradient(to bottom, var(--sky-bg) 0, var(--sky-bg) calc(100% - 100px), var(--paper) 100%); }
+.sample-note { border-color: var(--foil-3); }

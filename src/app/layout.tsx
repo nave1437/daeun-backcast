@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Hahmlet, IBM_Plex_Sans_KR } from "next/font/google";
 import "./globals.css";
 import { Paper } from "@/components/Paper";
-import { ThemeToggle } from "@/components/ThemeToggle";
 import Link from "next/link";
 
 // 애드센스 게시자 ID. 환경변수가 없으면 기본값(nave.io.kr 계정)을 쓴다.
@@ -17,7 +16,7 @@ const HANJA_URL = `https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@6
 
 export const metadata: Metadata = {
   title: "대운 역산",
-  description: "오늘 한 줌의 눈이 어느 해에 어떤 눈덩이가 되는지. 목표 연도를 고르면 그 사이 모든 대운 고개에서 눈덩이가 얼마나 커져 있어야 하는지 거꾸로 셉니다.",
+  description: "이루고 싶은 해를 정하면 그때까지의 대운을 사주로 풀고, 대운마다 할 일을 거꾸로 짜 드려요.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,7 +26,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
         <link rel="stylesheet" href={HANJA_URL} />
-        <script dangerouslySetInnerHTML={{ __html: `try{if(localStorage.getItem('theme')==='light')document.documentElement.dataset.theme='light'}catch(e){}` }} />
         {ADSENSE_CLIENT && <meta name="google-adsense-account" content={ADSENSE_CLIENT} />}
         {ADSENSE_CLIENT && <script async src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`} crossOrigin="anonymous" />}
       </head>
@@ -36,8 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="page">
           {children}
           <footer className="site-foot">
-            <ThemeToggle />
-            <nav className="foot-links"><Link href="/guide">읽을거리</Link><Link href="/privacy">개인정보처리방침</Link><Link href="/">소개</Link></nav>
+            <nav className="foot-links"><Link href="/sample">예시 결과</Link><Link href="/guide">읽을거리</Link><Link href="/about">소개</Link><Link href="/privacy">개인정보처리방침</Link></nav>
           </footer>
         </div>
       </body>

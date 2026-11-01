@@ -28,7 +28,9 @@ export function parseBirth(form: FormData): BirthInput {
 
 export function chartOf(birth: BirthInput): Chart { return computeChart(birth); }
 
-export const FRIEND_REWARD_COUNT = 3;
+/** 거센 해 리포트가 열리는 친구 수. 친구가 초대 링크로 생년월일을 넣으면 열린다(결제 없음). */
+export const HARD_UNLOCK_FRIENDS = 1;
+export const FRIEND_REWARD_COUNT = HARD_UNLOCK_FRIENDS;
 
 export type FriendView = FriendProfile & { id: string; lines: { startYear: number; line: string }[] | null };
 
@@ -38,10 +40,13 @@ export interface ReadingView {
   friends: FriendView[];
   /** 결제됐는데 메모가 없는 친구가 있으면 다시 쓰기 버튼을 보여준다 */
   friendLinesMissing: boolean;
-  /** 거센 해 리포트(유료). 결제 전엔 null */
+  /** 거센 해 리포트. 친구가 들어오기 전엔 null */
   hardReport: HardReport | null;
-  /** 결제됐는데 리포트가 아직 없음 */
+  /** 친구가 들어와 열렸는데 리포트가 아직 없음 → 자동 생성 */
   hardReportMissing: boolean;
+  /** 친구 HARD_UNLOCK_FRIENDS명 이상이면 열림 */
+  hardUnlocked: boolean;
+  hardCount: number;
   /** 시기별로 문단이 보이는지. 무료: 지금 시기 + 친구 보상으로 열린 시기 */
   visible: boolean[];
   elements: ReturnType<typeof elementCounts>;
@@ -73,10 +78,11 @@ export async function loadReading(id: string): Promise<ReadingView | null> {
   }));
   const hardReport = r.hard_report ? (JSON.parse(r.hard_report) as HardReport) : null;
   const hardCount = plan.steps.reduce((a, s) => a + s.hardYears.length, 0);
+  const hardUnlocked = friends.length >= HARD_UNLOCK_FRIENDS;
   return {
     id, alias: r.alias, chart, plan, paid, prose, proseMissing: !prose,
     friends, friendLinesMissing: FRIEND_LINES && !!prose && friends.some((f) => !f.lines),
-    hardReport, hardReportMissing: paid && hardCount > 0 && !hardReport,
+    hardReport, hardReportMissing: hardUnlocked && hardCount > 0 && !hardReport, hardUnlocked, hardCount,
     visible: visibleSteps(plan), elements: elementCounts(chart), readingCount: await db.countReadings(),
   };
 }
@@ -109,10 +115,10 @@ export async function generateProse(id: string, force = false) {
     try { const r = await writeFriendLines(v.alias, v.plan, prose, f); await db.setFriendLines(id, f.id, r.lines, r.usage); }
     catch (e) { console.error("[prose:friend]", e); }
   }
-  if (v.paid && (!v.hardReport || force)) await generateHardReport(id);
+  if (v.hardUnlocked && (!v.hardReport || force)) await generateHardReport(id);
 }
 
-/** 거센 해 리포트(유료). 결제 직후 1회 생성해 저장한다. */
+/** 거센 해 리포트. 친구가 처음 들어올 때 1회 생성해 저장한다. */
 export async function generateHardReport(id: string) {
   const v = await loadReading(id);
   if (!v) return;
@@ -125,6 +131,7 @@ export async function addFriendFlow(readingId: string, alias: string, birth: Bir
   const friendChart = computeChart(birth);
   const fid = await db.addFriend(readingId, alias, birth);
   const v = await loadReading(readingId);
+  if (v?.hardUnlocked && !v.hardReport && v.hardCount > 0) await generateHardReport(readingId);
   if (FRIEND_LINES && v?.prose) {
     // 계획 본문은 그대로 두고 이 친구에 대한 시기별 한 문장만 쓴다.
     try {

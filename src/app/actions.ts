@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { parseBirth, createReadingFlow, addFriendFlow, removeFriendFlow, payFlow, generateProse, TODAY_YEAR } from "@/lib/flow";
+import { parseBirth, createReadingFlow, addFriendFlow, removeFriendFlow, generateProse, TODAY_YEAR } from "@/lib/flow";
 
 export interface ActionError { ok: false; error: string }
 
@@ -42,12 +42,6 @@ export async function removeFriend(readingId: string, friendId: string) {
   revalidatePath(`/r/${readingId}`);
 }
 
-export async function payAction(id: string) {
-  await payFlow(id);
-  revalidatePath(`/r/${id}`);
-  revalidatePath(`/r/${id}/hard`);
-  redirect(`/r/${id}/hard`);
-}
 
 export async function retryProse(id: string) {
   await generateProse(id, false);

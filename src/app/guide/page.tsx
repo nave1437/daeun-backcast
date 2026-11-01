@@ -6,9 +6,9 @@ export const metadata = { title: "대운 역산 · 읽을거리", description: "
 export default function GuideIndex() {
   return (
     <article className="legal guide-index">
-      <Link href="/" className="tlink">← 소개로</Link>
+      <Link href="/" className="tlink">← 처음으로</Link>
       <span className="eyebrow accent">읽을거리</span>
-      <h1>사주와 역산, 열 가지 질문</h1>
+      <h1>사주와 역산 이야기</h1>
       <p className="cap">서비스가 쓰는 개념을 하나씩 풀어 둔 글입니다. 순서대로 읽으면 결과 글이 더 잘 읽힙니다.</p>
       <ol className="guide-list">
         {GUIDE.map((g, i) => (
@@ -21,7 +21,7 @@ export default function GuideIndex() {
           </li>
         ))}
       </ol>
-      <Link href="/start" className="btn-cta">내 꿈 역산하기</Link>
+      <Link href="/start" className="btn-cta">시작하기</Link>
     </article>
   );
 }
